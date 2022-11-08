@@ -43,4 +43,6 @@ class Customer extends Equatable {
 
   @override
   List<Object?> get props => [];
+
+  static getAlls() => List<Customer>.empty();
 }
