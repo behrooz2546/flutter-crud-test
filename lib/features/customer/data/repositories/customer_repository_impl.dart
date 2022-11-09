@@ -33,7 +33,7 @@ class CustomerRepositoryImpl
   }
 
   @override
-  Future<Either<Failure, CustomerModel>> getSingleCustomer() {
+  Future<Either<Failure, CustomerModel>> getSingleCustomer(String id) {
     // TODO: implement getSingleCustomer
     throw UnimplementedError();
   }

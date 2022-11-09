@@ -8,13 +8,15 @@ part of 'customer_model.dart';
 
 CustomerModel _$CustomerModelFromJson(Map<String, dynamic> json) =>
     CustomerModel(
-      id: json['id'] as String,
-      firstName: json['firstName'] as String,
-      lastName: json['lastName'] as String,
-      dateOfBirth: DateTime.parse(json['dateOfBirth'] as String),
-      phoneNumber: json['phoneNumber'] as String,
-      email: json['email'] as String,
-      bankAccountNumber: json['bankAccountNumber'] as String,
+      id: json['id'] as int?,
+      firstName: json['firstName'] as String?,
+      lastName: json['lastName'] as String?,
+      dateOfBirth: json['dateOfBirth'] == null
+          ? null
+          : DateTime.parse(json['dateOfBirth'] as String),
+      phoneNumber: json['phoneNumber'] as String?,
+      email: json['email'] as String?,
+      bankAccountNumber: json['bankAccountNumber'] as String?,
     );
 
 Map<String, dynamic> _$CustomerModelToJson(CustomerModel instance) =>
@@ -22,7 +24,7 @@ Map<String, dynamic> _$CustomerModelToJson(CustomerModel instance) =>
       'id': instance.id,
       'firstName': instance.firstName,
       'lastName': instance.lastName,
-      'dateOfBirth': instance.dateOfBirth.toIso8601String(),
+      'dateOfBirth': instance.dateOfBirth?.toIso8601String(),
       'phoneNumber': instance.phoneNumber,
       'email': instance.email,
       'bankAccountNumber': instance.bankAccountNumber,

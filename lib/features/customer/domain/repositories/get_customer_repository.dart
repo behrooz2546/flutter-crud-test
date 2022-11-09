@@ -4,5 +4,5 @@ import 'package:mc_crud_test/features/customer/data/models/customer_model.dart';
 
 abstract class GetCustomerRepository {
   Future<Either<Failure, List<CustomerModel>>> getAllCustomers();
-  Future<Either<Failure, CustomerModel>> getSingleCustomer();
+  Future<Either<Failure, CustomerModel>> getSingleCustomer(String id);
 }
