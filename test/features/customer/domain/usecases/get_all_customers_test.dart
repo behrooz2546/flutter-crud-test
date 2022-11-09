@@ -22,7 +22,7 @@ void main() async {
 
   test('should get all customers from repository', () async {
     when(repository.getAlls()).thenAnswer((_) async => Right(allCustomers));
-    final result = await usecase.execute();
+    final result = await usecase.call(NoParams());
 
     expect(result, Right(allCustomers));
 
