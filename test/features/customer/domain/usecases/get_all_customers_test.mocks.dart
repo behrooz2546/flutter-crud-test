@@ -7,7 +7,7 @@ import 'dart:async' as _i4;
 
 import 'package:either_dart/either.dart' as _i2;
 import 'package:mc_crud_test/core/error/failures.dart' as _i5;
-import 'package:mc_crud_test/features/customer/domain/entites/customer.dart'
+import 'package:mc_crud_test/features/customer/data/models/customer_model.dart'
     as _i6;
 import 'package:mc_crud_test/features/customer/domain/repositories/customer_repository.dart'
     as _i3;
@@ -44,20 +44,20 @@ class MockCustomerRepository extends _i1.Mock
   }
 
   @override
-  _i4.Future<_i2.Either<_i5.Failure, List<_i6.Customer>>> getAlls() =>
+  _i4.Future<_i2.Either<_i5.Failure, List<_i6.CustomerModel>>> getAlls() =>
       (super.noSuchMethod(
         Invocation.method(
           #getAlls,
           [],
         ),
         returnValue:
-            _i4.Future<_i2.Either<_i5.Failure, List<_i6.Customer>>>.value(
-                _FakeEither_0<_i5.Failure, List<_i6.Customer>>(
+            _i4.Future<_i2.Either<_i5.Failure, List<_i6.CustomerModel>>>.value(
+                _FakeEither_0<_i5.Failure, List<_i6.CustomerModel>>(
           this,
           Invocation.method(
             #getAlls,
             [],
           ),
         )),
-      ) as _i4.Future<_i2.Either<_i5.Failure, List<_i6.Customer>>>);
+      ) as _i4.Future<_i2.Either<_i5.Failure, List<_i6.CustomerModel>>>);
 }

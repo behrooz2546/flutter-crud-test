@@ -1,10 +1,10 @@
 import 'package:equatable/equatable.dart';
 import 'package:json_annotation/json_annotation.dart';
 
-part 'customer.g.dart';
+part 'customer_model.g.dart';
 
 @JsonSerializable()
-class Customer extends Equatable {
+class CustomerModel extends Equatable {
   @JsonKey(name: 'id')
   final String id;
 
@@ -26,7 +26,7 @@ class Customer extends Equatable {
   @JsonKey(name: 'bankAccountNumber')
   final String bankAccountNumber;
 
-  const Customer({
+  const CustomerModel({
     required this.id,
     required this.firstName,
     required this.lastName,
@@ -36,13 +36,13 @@ class Customer extends Equatable {
     required this.bankAccountNumber,
   });
 
-  factory Customer.fromJson(Map<String, dynamic> json) =>
-      _$CustomerFromJson(json);
+  factory CustomerModel.fromJson(Map<String, dynamic> json) =>
+      _$CustomerModelFromJson(json);
 
-  Map<String, dynamic> toJson() => _$CustomerToJson(this);
+  Map<String, dynamic> toJson() => _$CustomerModelToJson(this);
 
   @override
   List<Object?> get props => [];
 
-  static getAlls() => List<Customer>.empty();
+  static getAlls() => List<CustomerModel>.empty();
 }
