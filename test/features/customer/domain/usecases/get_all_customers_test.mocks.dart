@@ -9,7 +9,7 @@ import 'package:either_dart/either.dart' as _i2;
 import 'package:mc_crud_test/core/error/failures.dart' as _i5;
 import 'package:mc_crud_test/features/customer/data/models/customer_model.dart'
     as _i6;
-import 'package:mc_crud_test/features/customer/domain/repositories/customer_repository.dart'
+import 'package:mc_crud_test/features/customer/domain/repositories/get_customer_repository.dart'
     as _i3;
 import 'package:mockito/mockito.dart' as _i1;
 
@@ -34,20 +34,22 @@ class _FakeEither_0<L, R> extends _i1.SmartFake implements _i2.Either<L, R> {
         );
 }
 
-/// A class which mocks [CustomerRepository].
+/// A class which mocks [GetCustomerRepository].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockCustomerRepository extends _i1.Mock
-    implements _i3.CustomerRepository {
-  MockCustomerRepository() {
+class MockGetCustomerRepository extends _i1.Mock
+    implements _i3.GetCustomerRepository {
+  MockGetCustomerRepository() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i4.Future<_i2.Either<_i5.Failure, List<_i6.CustomerModel>>> getAlls() =>
+  _i4.Future<
+      _i2
+          .Either<_i5.Failure, List<_i6.CustomerModel>>> getAllCustomers() =>
       (super.noSuchMethod(
         Invocation.method(
-          #getAlls,
+          #getAllCustomers,
           [],
         ),
         returnValue:
@@ -55,9 +57,26 @@ class MockCustomerRepository extends _i1.Mock
                 _FakeEither_0<_i5.Failure, List<_i6.CustomerModel>>(
           this,
           Invocation.method(
-            #getAlls,
+            #getAllCustomers,
             [],
           ),
         )),
       ) as _i4.Future<_i2.Either<_i5.Failure, List<_i6.CustomerModel>>>);
+  @override
+  _i4.Future<_i2.Either<_i5.Failure, _i6.CustomerModel>> getSingleCustomer() =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #getSingleCustomer,
+          [],
+        ),
+        returnValue:
+            _i4.Future<_i2.Either<_i5.Failure, _i6.CustomerModel>>.value(
+                _FakeEither_0<_i5.Failure, _i6.CustomerModel>(
+          this,
+          Invocation.method(
+            #getSingleCustomer,
+            [],
+          ),
+        )),
+      ) as _i4.Future<_i2.Either<_i5.Failure, _i6.CustomerModel>>);
 }
