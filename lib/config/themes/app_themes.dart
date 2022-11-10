@@ -4,8 +4,8 @@ class AppTheme {
   static ThemeData get light {
     return ThemeData(
       appBarTheme: const AppBarTheme(
-        elevation: 0,
-        color: Colors.white,
+        elevation: 1,
+        color: Colors.blueGrey,
       ),
       scaffoldBackgroundColor: Colors.white,
       primaryColor: Colors.black,
@@ -14,4 +14,3 @@ class AppTheme {
     );
   }
 }
-  

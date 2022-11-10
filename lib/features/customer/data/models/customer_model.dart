@@ -1,6 +1,7 @@
 import 'package:equatable/equatable.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:mc_crud_test/config/constants.dart';
+import 'package:mock_data/mock_data.dart';
 
 part 'customer_model.g.dart';
 
@@ -72,5 +73,39 @@ class CustomerModel extends Equatable {
   @override
   List<Object?> get props => [];
 
-  static getAlls() => List<CustomerModel>.empty();
+  static getAlls() {
+    return [
+      CustomerModel(
+        id: mockInteger(1, 1000),
+        firstName: mockName(),
+        lastName: mockName(),
+        phoneNumber: "+989158949162",
+        email: "behrooz2546@gmail.com",
+        bankAccountNumber: "1213sdf34321",
+        dateOfBirth: mockDate(),
+      ),
+      CustomerModel(
+        id: mockInteger(1, 1000),
+        firstName: mockName(),
+        lastName: mockName(),
+        phoneNumber: "+989367998940",
+        email: "behrooz.azimifar2546@gmail.com",
+        bankAccountNumber: "1213sdf3adsad1",
+        dateOfBirth: mockDate(),
+      )
+    ];
+  }
+
+  static getExample() {
+    return CustomerModel(
+      firstName: "Behrooz",
+      lastName: "Azimifar",
+      email: "behrooz2546@gmail.com",
+      bankAccountNumber: "1213sdf34321",
+      phoneNumber: "+989158949162",
+      dateOfBirth: DateTime.now(),
+    );
+  }
+
+  String get fullName => "$firstName $lastName";
 }

@@ -3,10 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mc_crud_test/config/routes/application.dart';
 import 'package:mc_crud_test/config/themes/app_themes.dart';
+import 'package:mc_crud_test/features/customer/data/repositories/customer_database_service_impl.dart';
 
 import 'config/routes/router.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await CustomerDatabaseServiceImpl().initialize();
+
   // config fluro router
   final router = FluroRouter();
   Routes.configureRoutes(router);

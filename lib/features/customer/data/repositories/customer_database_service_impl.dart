@@ -2,17 +2,24 @@ import 'package:mc_crud_test/config/constants.dart';
 import 'package:mc_crud_test/features/customer/data/models/customer_model.dart';
 import 'package:mc_crud_test/features/customer/domain/repositories/customer_database_service.dart';
 import 'package:sqflite/sqflite.dart';
+import 'package:path/path.dart' as p;
 
 class CustomerDatabaseServiceImpl implements CustomerDatabaseService {
   late Database db;
 
-  CustomerDatabaseServiceImpl._privateConstructor();
-  static final CustomerDatabaseService instance =
-      CustomerDatabaseServiceImpl._privateConstructor();
+  static final CustomerDatabaseServiceImpl _singleton =
+      CustomerDatabaseServiceImpl._internal();
 
-  Future initialize(String path) async {
+  factory CustomerDatabaseServiceImpl() {
+    return _singleton;
+  }
+
+  CustomerDatabaseServiceImpl._internal();
+
+  Future<void> initialize() async {
+    String dbPath = p.join(await getDatabasesPath(), "test.db");
     db = await openDatabase(
-      path,
+      dbPath,
       version: 1,
       onCreate: (Database db, int version) async {
         return await db.execute(databaseRules);

@@ -382,6 +382,13 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "1.0.2"
+  mock_data:
+    dependency: "direct main"
+    description:
+      name: mock_data
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "2.0.0"
   mockito:
     dependency: "direct dev"
     description:

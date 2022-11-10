@@ -12,7 +12,8 @@ class GetAllCustomersUsecase implements UseCase<List<CustomerModel>, NoParams> {
 
   @override
   Future<Either<Failure, List<CustomerModel>>> call(NoParams params) async {
-    return await repository.getAllCustomers();
+    final customers = await repository.getAllCustomers();
+    return customers;
   }
 }
 
