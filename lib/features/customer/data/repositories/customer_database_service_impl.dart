@@ -16,6 +16,7 @@ class CustomerDatabaseServiceImpl implements CustomerDatabaseService {
 
   CustomerDatabaseServiceImpl._internal();
 
+  @override
   Future<void> initialize() async {
     String dbPath = p.join(await getDatabasesPath(), "test.db");
     db = await openDatabase(

@@ -3,13 +3,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mc_crud_test/config/routes/application.dart';
 import 'package:mc_crud_test/config/themes/app_themes.dart';
-import 'package:mc_crud_test/features/customer/data/repositories/customer_database_service_impl.dart';
+import 'package:mc_crud_test/features/customer/domain/repositories/customer_database_service.dart';
 
 import 'config/routes/router.dart';
+import 'service_locator.dart' as di;
 
 void main() async {
+  // config service locator
+  await di.init();
+
   WidgetsFlutterBinding.ensureInitialized();
-  await CustomerDatabaseServiceImpl().initialize();
+  await di.sl<CustomerDatabaseService>().initialize();
 
   // config fluro router
   final router = FluroRouter();

@@ -69,13 +69,14 @@ class MockCustomerDatabaseServiceImpl extends _i1.Mock
         returnValueForMissingStub: null,
       );
   @override
-  _i5.Future<dynamic> initialize(String? path) => (super.noSuchMethod(
+  _i5.Future<void> initialize() => (super.noSuchMethod(
         Invocation.method(
           #initialize,
-          [path],
+          [],
         ),
-        returnValue: _i5.Future<dynamic>.value(),
-      ) as _i5.Future<dynamic>);
+        returnValue: _i5.Future<void>.value(),
+        returnValueForMissingStub: _i5.Future<void>.value(),
+      ) as _i5.Future<void>);
   @override
   _i5.Future<int?> deleteCustomer(int? id) => (super.noSuchMethod(
         Invocation.method(
