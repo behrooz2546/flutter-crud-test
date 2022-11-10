@@ -1,5 +1,6 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mc_crud_test/features/customer/data/models/customer_model.dart';
 
 part 'customer_event.dart';
 part 'customer_state.dart';
