@@ -2,8 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:mc_crud_test/features/customer/data/models/customer_model.dart';
 import 'package:mc_crud_test/features/customer/presentation/bloc/customer_list/customer_list_bloc.dart';
+import 'package:mc_crud_test/features/customer/presentation/pages/customer_form_page.dart';
 import 'package:mc_crud_test/features/customer/presentation/widgets/customer_item.dart';
 
 class CustomerListPage extends StatefulWidget {
@@ -71,7 +71,7 @@ class _CustomerListPageState extends State<CustomerListPage> {
   }
 
   void _handleAddButtonTapped() {
-    debugPrint("handleAddButtonTapped");
+    CustomerFormPage.show(context: context);
   }
 
   Widget _buildLoadingState() {
