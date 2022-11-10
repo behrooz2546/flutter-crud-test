@@ -9,11 +9,10 @@ import 'config/routes/router.dart';
 import 'service_locator.dart' as di;
 
 void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
   // config service locator
   await di.init();
-
-  WidgetsFlutterBinding.ensureInitialized();
-  await di.sl<CustomerDatabaseService>().initialize();
 
   // config fluro router
   final router = FluroRouter();

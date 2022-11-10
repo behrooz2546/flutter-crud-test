@@ -21,6 +21,7 @@ Future<void> init() async {
       () => CustomerRepositoryImpl(sl()));
 
   // DatabaseService
-  sl.registerLazySingleton<CustomerDatabaseService>(
-      () => CustomerDatabaseServiceImpl());
+  final databaseService = CustomerDatabaseServiceImpl();
+  await databaseService.initialize();
+  sl.registerLazySingleton<CustomerDatabaseService>(() => databaseService);
 }
