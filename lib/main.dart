@@ -1,8 +1,17 @@
+import 'package:fluro/fluro.dart';
 import 'package:flutter/material.dart';
-import 'package:mc_crud_test/config/routes/app_routes.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:mc_crud_test/config/routes/application.dart';
 import 'package:mc_crud_test/config/themes/app_themes.dart';
 
+import 'config/routes/router.dart';
+
 void main() {
+  // config fluro router
+  final router = FluroRouter();
+  Routes.configureRoutes(router);
+
+  Application.router = router;
   runApp(const MyApp());
 }
 
@@ -11,10 +20,17 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: AppTheme.light,
-      onGenerateRoute: AppRoutes.onGenerateRoutes,
+    return ScreenUtilInit(
+      designSize: const Size(375, 812),
+      minTextAdapt: true,
+      builder: (BuildContext context, Widget? child) {
+        return MaterialApp(
+          title: 'Flutter Demo',
+          theme: AppTheme.light,
+          home: child,
+          onGenerateRoute: Application.router.generator,
+        );
+      },
     );
   }
 }
