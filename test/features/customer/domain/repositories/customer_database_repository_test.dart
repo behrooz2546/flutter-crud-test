@@ -1,5 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mc_crud_test/config/constants.dart';
+import 'package:mc_crud_test/features/customer/data/datasources/create_customer_request.dart';
 import 'package:mc_crud_test/features/customer/data/models/customer_model.dart';
 import 'package:mc_crud_test/features/customer/data/repositories/customer_database_service_impl.dart';
 import 'package:mockito/annotations.dart';
@@ -9,16 +10,21 @@ import 'package:sqflite_common_ffi/sqflite_ffi.dart';
 
 import 'customer_database_repository_test.mocks.dart';
 
-@GenerateMocks([CustomerDatabaseServiceImpl])
+@GenerateMocks([
+  CustomerDatabaseServiceImpl,
+  CustomerModel,
+  CreateCustomerRequest,
+])
 void main() {
   late Database database;
   late MockCustomerDatabaseServiceImpl databaseService;
-  CustomerModel model = CustomerModel(
-    firstName: "Behrooz",
-    lastName: "Azimifar",
-    email: "behrooz2546@gmail.com",
-    bankAccountNumber: "1213sdf34324",
-    phoneNumber: "+989158949160",
+  CustomerModel model = MockCustomerModel();
+  CreateCustomerRequest request = CreateCustomerRequest(
+    firstName: "testet",
+    lastName: "tesaf",
+    email: "asdad@gmail.com",
+    bankAccountNumber: "asdasdasda",
+    phoneNumber: "+345345345",
     dateOfBirth: DateTime.now(),
   );
   List<CustomerModel> models = List.generate(10, (index) => model);
@@ -38,7 +44,7 @@ void main() {
 
   group("Database Test", () {
     test('add Item to database', () async {
-      var i = await database.insert(tableName, model.toMap());
+      var i = await database.insert(tableName, request.toMap());
       var p = await database.query(tableName);
       expect(p.length, i);
     });
@@ -102,31 +108,31 @@ void main() {
   });
 
   group("Service test", () {
-    test("create task", () async {
-      verifyNever(databaseService.insertCustomer(model));
-      expect(await databaseService.insertCustomer(model), model);
-      verify(databaseService.insertCustomer(model)).called(1);
+    test("create customer", () async {
+      verifyNever(databaseService.insertCustomer(request));
+      expect(await databaseService.insertCustomer(request), model);
+      verify(databaseService.insertCustomer(request)).called(1);
     });
 
-    test("update task", () async {
+    test("update customer", () async {
       verifyNever(databaseService.updateCustomer(model));
       expect(await databaseService.updateCustomer(model), 1);
       verify(databaseService.updateCustomer(model)).called(1);
     });
 
-    test("delete task", () async {
+    test("delete customer", () async {
       verifyNever(databaseService.deleteCustomer(1));
       expect(await databaseService.deleteCustomer(1), 1);
       verify(databaseService.deleteCustomer(1)).called(1);
     });
 
-    test("get task", () async {
+    test("get customer", () async {
       verifyNever(databaseService.getCustomer(1));
       expect(await databaseService.getCustomer(1), model);
       verify(databaseService.getCustomer(1)).called(1);
     });
 
-    test("get all task", () async {
+    test("get all customers", () async {
       verifyNever(databaseService.getAllCustomers());
       expect(await databaseService.getAllCustomers(), models);
       verify(databaseService.getAllCustomers()).called(1);

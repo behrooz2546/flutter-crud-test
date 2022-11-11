@@ -1,4 +1,5 @@
 import 'package:equatable/equatable.dart';
+import 'package:mc_crud_test/config/constants.dart';
 
 class CreateCustomerRequest extends Equatable {
   final String firstName;
@@ -16,6 +17,19 @@ class CreateCustomerRequest extends Equatable {
     required this.email,
     required this.bankAccountNumber,
   });
+
+  Map<String, dynamic> toMap() {
+    var map = <String, dynamic>{
+      columnFirstName: firstName,
+      columnLastName: lastName,
+      columnDateOfBirth: dateOfBirth.toIso8601String(),
+      columnPhoneNumber: phoneNumber,
+      columnEmail: email,
+      columnBankAccountNumber: bankAccountNumber,
+    };
+
+    return map;
+  }
 
   @override
   List<Object?> get props => [email, phoneNumber];

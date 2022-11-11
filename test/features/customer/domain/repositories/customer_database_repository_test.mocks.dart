@@ -3,12 +3,14 @@
 // Do not manually edit this file.
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'dart:async' as _i5;
+import 'dart:async' as _i4;
 
+import 'package:mc_crud_test/features/customer/data/datasources/create_customer_request.dart'
+    as _i6;
 import 'package:mc_crud_test/features/customer/data/models/customer_model.dart'
-    as _i3;
+    as _i5;
 import 'package:mc_crud_test/features/customer/data/repositories/customer_database_service_impl.dart'
-    as _i4;
+    as _i3;
 import 'package:mockito/mockito.dart' as _i1;
 import 'package:sqflite/sqflite.dart' as _i2;
 
@@ -33,8 +35,8 @@ class _FakeDatabase_0 extends _i1.SmartFake implements _i2.Database {
         );
 }
 
-class _FakeCustomerModel_1 extends _i1.SmartFake implements _i3.CustomerModel {
-  _FakeCustomerModel_1(
+class _FakeDateTime_1 extends _i1.SmartFake implements DateTime {
+  _FakeDateTime_1(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -47,7 +49,7 @@ class _FakeCustomerModel_1 extends _i1.SmartFake implements _i3.CustomerModel {
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockCustomerDatabaseServiceImpl extends _i1.Mock
-    implements _i4.CustomerDatabaseServiceImpl {
+    implements _i3.CustomerDatabaseServiceImpl {
   MockCustomerDatabaseServiceImpl() {
     _i1.throwOnMissingStub(this);
   }
@@ -69,69 +71,213 @@ class MockCustomerDatabaseServiceImpl extends _i1.Mock
         returnValueForMissingStub: null,
       );
   @override
-  _i5.Future<void> initialize() => (super.noSuchMethod(
+  _i4.Future<void> initialize() => (super.noSuchMethod(
         Invocation.method(
           #initialize,
           [],
         ),
-        returnValue: _i5.Future<void>.value(),
-        returnValueForMissingStub: _i5.Future<void>.value(),
-      ) as _i5.Future<void>);
+        returnValue: _i4.Future<void>.value(),
+        returnValueForMissingStub: _i4.Future<void>.value(),
+      ) as _i4.Future<void>);
   @override
-  _i5.Future<int?> deleteCustomer(int? id) => (super.noSuchMethod(
+  _i4.Future<int?> deleteCustomer(int? id) => (super.noSuchMethod(
         Invocation.method(
           #deleteCustomer,
           [id],
         ),
-        returnValue: _i5.Future<int?>.value(),
-      ) as _i5.Future<int?>);
+        returnValue: _i4.Future<int?>.value(),
+      ) as _i4.Future<int?>);
   @override
-  _i5.Future<List<_i3.CustomerModel>> getAllCustomers() => (super.noSuchMethod(
+  _i4.Future<List<_i5.CustomerModel>> getAllCustomers() => (super.noSuchMethod(
         Invocation.method(
           #getAllCustomers,
           [],
         ),
         returnValue:
-            _i5.Future<List<_i3.CustomerModel>>.value(<_i3.CustomerModel>[]),
-      ) as _i5.Future<List<_i3.CustomerModel>>);
+            _i4.Future<List<_i5.CustomerModel>>.value(<_i5.CustomerModel>[]),
+      ) as _i4.Future<List<_i5.CustomerModel>>);
   @override
-  _i5.Future<_i3.CustomerModel?> getCustomer(int? id) => (super.noSuchMethod(
+  _i4.Future<_i5.CustomerModel?> getCustomer(int? id) => (super.noSuchMethod(
         Invocation.method(
           #getCustomer,
           [id],
         ),
-        returnValue: _i5.Future<_i3.CustomerModel?>.value(),
-      ) as _i5.Future<_i3.CustomerModel?>);
+        returnValue: _i4.Future<_i5.CustomerModel?>.value(),
+      ) as _i4.Future<_i5.CustomerModel?>);
   @override
-  _i5.Future<_i3.CustomerModel> insertCustomer(_i3.CustomerModel? customer) =>
+  _i4.Future<_i5.CustomerModel?> insertCustomer(
+          _i6.CreateCustomerRequest? request) =>
       (super.noSuchMethod(
         Invocation.method(
           #insertCustomer,
-          [customer],
+          [request],
         ),
-        returnValue: _i5.Future<_i3.CustomerModel>.value(_FakeCustomerModel_1(
-          this,
-          Invocation.method(
-            #insertCustomer,
-            [customer],
-          ),
-        )),
-      ) as _i5.Future<_i3.CustomerModel>);
+        returnValue: _i4.Future<_i5.CustomerModel?>.value(),
+      ) as _i4.Future<_i5.CustomerModel?>);
   @override
-  _i5.Future<int?> updateCustomer(_i3.CustomerModel? customer) =>
+  _i4.Future<int?> updateCustomer(_i5.CustomerModel? customer) =>
       (super.noSuchMethod(
         Invocation.method(
           #updateCustomer,
           [customer],
         ),
-        returnValue: _i5.Future<int?>.value(),
-      ) as _i5.Future<int?>);
+        returnValue: _i4.Future<int?>.value(),
+      ) as _i4.Future<int?>);
   @override
-  _i5.Future<dynamic> close() => (super.noSuchMethod(
+  _i4.Future<dynamic> close() => (super.noSuchMethod(
         Invocation.method(
           #close,
           [],
         ),
-        returnValue: _i5.Future<dynamic>.value(),
-      ) as _i5.Future<dynamic>);
+        returnValue: _i4.Future<dynamic>.value(),
+      ) as _i4.Future<dynamic>);
+}
+
+/// A class which mocks [CustomerModel].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockCustomerModel extends _i1.Mock implements _i5.CustomerModel {
+  MockCustomerModel() {
+    _i1.throwOnMissingStub(this);
+  }
+
+  @override
+  set id(int? _id) => super.noSuchMethod(
+        Invocation.setter(
+          #id,
+          _id,
+        ),
+        returnValueForMissingStub: null,
+      );
+  @override
+  set firstName(String? _firstName) => super.noSuchMethod(
+        Invocation.setter(
+          #firstName,
+          _firstName,
+        ),
+        returnValueForMissingStub: null,
+      );
+  @override
+  set lastName(String? _lastName) => super.noSuchMethod(
+        Invocation.setter(
+          #lastName,
+          _lastName,
+        ),
+        returnValueForMissingStub: null,
+      );
+  @override
+  set dateOfBirth(DateTime? _dateOfBirth) => super.noSuchMethod(
+        Invocation.setter(
+          #dateOfBirth,
+          _dateOfBirth,
+        ),
+        returnValueForMissingStub: null,
+      );
+  @override
+  set phoneNumber(String? _phoneNumber) => super.noSuchMethod(
+        Invocation.setter(
+          #phoneNumber,
+          _phoneNumber,
+        ),
+        returnValueForMissingStub: null,
+      );
+  @override
+  set email(String? _email) => super.noSuchMethod(
+        Invocation.setter(
+          #email,
+          _email,
+        ),
+        returnValueForMissingStub: null,
+      );
+  @override
+  set bankAccountNumber(String? _bankAccountNumber) => super.noSuchMethod(
+        Invocation.setter(
+          #bankAccountNumber,
+          _bankAccountNumber,
+        ),
+        returnValueForMissingStub: null,
+      );
+  @override
+  List<Object?> get props => (super.noSuchMethod(
+        Invocation.getter(#props),
+        returnValue: <Object?>[],
+      ) as List<Object?>);
+  @override
+  String get fullName => (super.noSuchMethod(
+        Invocation.getter(#fullName),
+        returnValue: '',
+      ) as String);
+  @override
+  Map<String, dynamic> toJson() => (super.noSuchMethod(
+        Invocation.method(
+          #toJson,
+          [],
+        ),
+        returnValue: <String, dynamic>{},
+      ) as Map<String, dynamic>);
+  @override
+  Map<String, dynamic> toMap() => (super.noSuchMethod(
+        Invocation.method(
+          #toMap,
+          [],
+        ),
+        returnValue: <String, dynamic>{},
+      ) as Map<String, dynamic>);
+}
+
+/// A class which mocks [CreateCustomerRequest].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockCreateCustomerRequest extends _i1.Mock
+    implements _i6.CreateCustomerRequest {
+  MockCreateCustomerRequest() {
+    _i1.throwOnMissingStub(this);
+  }
+
+  @override
+  String get firstName => (super.noSuchMethod(
+        Invocation.getter(#firstName),
+        returnValue: '',
+      ) as String);
+  @override
+  String get lastName => (super.noSuchMethod(
+        Invocation.getter(#lastName),
+        returnValue: '',
+      ) as String);
+  @override
+  DateTime get dateOfBirth => (super.noSuchMethod(
+        Invocation.getter(#dateOfBirth),
+        returnValue: _FakeDateTime_1(
+          this,
+          Invocation.getter(#dateOfBirth),
+        ),
+      ) as DateTime);
+  @override
+  String get phoneNumber => (super.noSuchMethod(
+        Invocation.getter(#phoneNumber),
+        returnValue: '',
+      ) as String);
+  @override
+  String get email => (super.noSuchMethod(
+        Invocation.getter(#email),
+        returnValue: '',
+      ) as String);
+  @override
+  String get bankAccountNumber => (super.noSuchMethod(
+        Invocation.getter(#bankAccountNumber),
+        returnValue: '',
+      ) as String);
+  @override
+  List<Object?> get props => (super.noSuchMethod(
+        Invocation.getter(#props),
+        returnValue: <Object?>[],
+      ) as List<Object?>);
+  @override
+  Map<String, dynamic> toMap() => (super.noSuchMethod(
+        Invocation.method(
+          #toMap,
+          [],
+        ),
+        returnValue: <String, dynamic>{},
+      ) as Map<String, dynamic>);
 }

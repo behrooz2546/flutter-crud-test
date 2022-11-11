@@ -1,4 +1,5 @@
 import 'package:mc_crud_test/config/constants.dart';
+import 'package:mc_crud_test/features/customer/data/datasources/create_customer_request.dart';
 import 'package:mc_crud_test/features/customer/data/models/customer_model.dart';
 import 'package:mc_crud_test/features/customer/domain/repositories/customer_database_service.dart';
 import 'package:sqflite/sqflite.dart';
@@ -61,8 +62,9 @@ class CustomerDatabaseServiceImpl implements CustomerDatabaseService {
   }
 
   @override
-  Future<CustomerModel> insertCustomer(CustomerModel customer) async {
-    customer.id = await db.insert(tableName, customer.toJson());
+  Future<CustomerModel?> insertCustomer(CreateCustomerRequest request) async {
+    final id = await db.insert(tableName, request.toMap());
+    final customer = await getCustomer(id);
     return customer;
   }
 

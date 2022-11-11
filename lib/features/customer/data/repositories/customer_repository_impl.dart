@@ -22,9 +22,14 @@ class CustomerRepositoryImpl
 
   @override
   Future<Either<Failure, CustomerModel>> createCustomer(
-      CreateCustomerRequest request) {
-    // TODO: implement createCustomer
-    throw UnimplementedError();
+      CreateCustomerRequest request) async {
+    try {
+      final customer = await databaseService.insertCustomer(request);
+      return customer != null ? Right(customer) : Left(DatabaseFailure());
+    } catch (error) {
+      debugPrint(error.toString());
+      return Left(DatabaseFailure());
+    }
   }
 
   @override
@@ -37,7 +42,7 @@ class CustomerRepositoryImpl
   Future<Either<Failure, List<CustomerModel>>> getAllCustomers() async {
     try {
       final customers = await databaseService.getAllCustomers();
-      return Right(CustomerModel.getAlls());
+      return Right(customers);
     } catch (error) {
       debugPrint(error.toString());
       return Left(DatabaseFailure());

@@ -214,4 +214,12 @@ class MockCreateCustomerRequest extends _i1.Mock
         Invocation.getter(#props),
         returnValue: <Object?>[],
       ) as List<Object?>);
+  @override
+  Map<String, dynamic> toMap() => (super.noSuchMethod(
+        Invocation.method(
+          #toMap,
+          [],
+        ),
+        returnValue: <String, dynamic>{},
+      ) as Map<String, dynamic>);
 }
