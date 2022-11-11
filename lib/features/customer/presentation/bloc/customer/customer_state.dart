@@ -1,24 +1,37 @@
 part of 'customer_bloc.dart';
 
-abstract class CustomerState extends Equatable {
-  const CustomerState();
+abstract class CustomerState extends Equatable {}
 
+class CustomerInitial extends CustomerState {
   @override
-  List<Object> get props => [];
+  List<Object?> get props => [];
 }
-
-class CustomerInitial extends CustomerState {}
 
 class CustomerErrorState extends CustomerState {
   final String errorMessage;
 
-  const CustomerErrorState(this.errorMessage);
+  CustomerErrorState(this.errorMessage);
+
+  @override
+  List<Object?> get props => [errorMessage];
 }
 
-class CustomerloadingState extends CustomerState {}
+class CustomerLoadingState extends CustomerState {
+  @override
+  List<Object?> get props => [];
+}
 
-class CustomerSuccessCreateState extends CustomerState {}
+class CustomerSuccessCreateState extends CustomerState {
+  @override
+  List<Object?> get props => [];
+}
 
-class CustomerSuccessUpdateState extends CustomerState {}
+class CustomerSuccessUpdateState extends CustomerState {
+  @override
+  List<Object?> get props => [];
+}
 
-class CustomerSuccessDeleteState extends CustomerState {}
+class CustomerSuccessDeleteState extends CustomerState {
+  @override
+  List<Object?> get props => [];
+}

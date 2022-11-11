@@ -1,4 +1,6 @@
-class CreateCustomerRequest {
+import 'package:equatable/equatable.dart';
+
+class CreateCustomerRequest extends Equatable {
   final String firstName;
   final String lastName;
   final DateTime dateOfBirth;
@@ -14,4 +16,7 @@ class CreateCustomerRequest {
     required this.email,
     required this.bankAccountNumber,
   });
+
+  @override
+  List<Object?> get props => [email, phoneNumber];
 }

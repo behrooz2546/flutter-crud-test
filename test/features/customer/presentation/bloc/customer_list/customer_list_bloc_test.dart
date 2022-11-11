@@ -10,10 +10,6 @@ import 'package:mockito/mockito.dart';
 
 import 'customer_list_bloc_test.mocks.dart';
 
-class MockCustomerListBloc
-    extends MockBloc<CustomerListEvent, CustomerListState>
-    implements CustomerListBloc {}
-
 @GenerateMocks([GetAllCustomersUsecase])
 void main() {
   late MockGetAllCustomersUsecase usecase;

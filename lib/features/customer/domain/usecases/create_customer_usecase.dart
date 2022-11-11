@@ -17,8 +17,3 @@ class CreateCustomerUsecase
     return repository.createCustomer(request);
   }
 }
-
-class NoParams extends Equatable {
-  @override
-  List<Object?> get props => [];
-}

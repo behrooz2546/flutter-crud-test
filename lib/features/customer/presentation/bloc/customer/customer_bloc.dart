@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:equatable/equatable.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mc_crud_test/features/customer/data/datasources/create_customer_request.dart';
 import 'package:mc_crud_test/features/customer/data/datasources/update_customer_request.dart';
@@ -22,21 +23,20 @@ class CustomerBloc extends Bloc<CustomerEvent, CustomerState> {
     required this.updateCustomerUsecase,
     required this.deleteCustomerUsecase,
   }) : super(CustomerInitial()) {
-    on<CustomerEvent>((event, emit) {
-      on<CustomerCreateEvent>(_onCustomerCreateEvent);
-      on<CustomerUpdateEvent>(_onCustomerUpdateEvent);
-      on<CustomerDeleteEvent>(_onCustomerDeleteEvent);
-    });
+    on<CustomerCreateEvent>(_onCustomerCreateEvent);
+    on<CustomerUpdateEvent>(_onCustomerUpdateEvent);
+    on<CustomerDeleteEvent>(_onCustomerDeleteEvent);
   }
 
   FutureOr<void> _onCustomerDeleteEvent(
       CustomerDeleteEvent event, Emitter<CustomerState> emit) async {
-    emit(CustomerloadingState());
+    emit(CustomerLoadingState());
 
     final result =
         await deleteCustomerUsecase.call(event.customer.id?.toString() ?? "");
     result.fold(
       (error) {
+        debugPrint(error.toString());
         emit(CustomerErrorState(error.toString()));
       },
       (success) {
@@ -47,11 +47,12 @@ class CustomerBloc extends Bloc<CustomerEvent, CustomerState> {
 
   FutureOr<void> _onCustomerUpdateEvent(
       CustomerUpdateEvent event, Emitter<CustomerState> emit) async {
-    emit(CustomerloadingState());
+    emit(CustomerLoadingState());
 
     final result = await updateCustomerUsecase.call(event.request);
     result.fold(
       (error) {
+        debugPrint(error.toString());
         emit(CustomerErrorState(error.toString()));
       },
       (success) {
@@ -62,11 +63,12 @@ class CustomerBloc extends Bloc<CustomerEvent, CustomerState> {
 
   FutureOr<void> _onCustomerCreateEvent(
       CustomerCreateEvent event, Emitter<CustomerState> emit) async {
-    emit(CustomerloadingState());
+    emit(CustomerLoadingState());
 
     final result = await createCustomerUsecase.call(event.request);
     result.fold(
       (error) {
+        debugPrint(error.toString());
         emit(CustomerErrorState(error.toString()));
       },
       (success) {

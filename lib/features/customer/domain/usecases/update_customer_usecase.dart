@@ -17,8 +17,3 @@ class UpdateCustomerUsecase
     return repository.updateCustomer(request);
   }
 }
-
-class NoParams extends Equatable {
-  @override
-  List<Object?> get props => [];
-}

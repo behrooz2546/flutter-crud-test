@@ -1,26 +1,30 @@
 part of 'customer_bloc.dart';
 
-abstract class CustomerEvent extends Equatable {
-  const CustomerEvent();
-
-  @override
-  List<Object> get props => [];
-}
+abstract class CustomerEvent extends Equatable {}
 
 class CustomerCreateEvent extends CustomerEvent {
   final CreateCustomerRequest request;
 
-  const CustomerCreateEvent(this.request);
+  CustomerCreateEvent(this.request);
+
+  @override
+  List<Object?> get props => [request];
 }
 
 class CustomerUpdateEvent extends CustomerEvent {
   final UpdateCustomerRequest request;
 
-  const CustomerUpdateEvent(this.request);
+  CustomerUpdateEvent(this.request);
+
+  @override
+  List<Object?> get props => [request];
 }
 
 class CustomerDeleteEvent extends CustomerEvent {
   final CustomerModel customer;
 
-  const CustomerDeleteEvent(this.customer);
+  CustomerDeleteEvent(this.customer);
+
+  @override
+  List<Object?> get props => [customer];
 }
