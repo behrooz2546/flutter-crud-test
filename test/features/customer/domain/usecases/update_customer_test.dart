@@ -26,7 +26,7 @@ void main() async {
   final customer = MockCustomerModel();
   final request = MockUpdateCustomerRequest();
 
-  test('should create customer from repository', () async {
+  test('should update customer from repository', () async {
     when(repository.updateCustomer(any))
         .thenAnswer((_) async => Right(customer));
     final result = await usecase.call(request);

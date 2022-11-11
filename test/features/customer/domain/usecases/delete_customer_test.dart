@@ -21,9 +21,7 @@ void main() async {
     usecase = DeleteCustomerUsecase(repository);
   });
 
-  final customer = MockCustomerModel();
-
-  test('should create customer from repository', () async {
+  test('should delete customer from repository', () async {
     when(repository.delete(any)).thenAnswer((_) async => const Right(true));
     final result = await usecase.call("1");
 
