@@ -8,5 +8,3 @@ abstract class CustomerListEvent extends Equatable {
 }
 
 class CustomerListLoadEvent extends CustomerListEvent {}
-
-class CustomerListDeleteEvent extends CustomerListEvent {}

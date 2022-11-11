@@ -8,13 +8,19 @@ abstract class CustomerEvent extends Equatable {
 }
 
 class CustomerCreateEvent extends CustomerEvent {
-  final CustomerModel customer;
+  final CreateCustomerRequest request;
 
-  const CustomerCreateEvent(this.customer);
+  const CustomerCreateEvent(this.request);
 }
 
 class CustomerUpdateEvent extends CustomerEvent {
+  final UpdateCustomerRequest request;
+
+  const CustomerUpdateEvent(this.request);
+}
+
+class CustomerDeleteEvent extends CustomerEvent {
   final CustomerModel customer;
 
-  const CustomerUpdateEvent(this.customer);
+  const CustomerDeleteEvent(this.customer);
 }

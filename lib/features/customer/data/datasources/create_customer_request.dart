@@ -1,5 +1,3 @@
-import 'package:mc_crud_test/config/constants.dart';
-
 class CreateCustomerRequest {
   final String firstName;
   final String lastName;
