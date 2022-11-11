@@ -1,5 +1,4 @@
 import 'package:either_dart/either.dart';
-import 'package:equatable/equatable.dart';
 import 'package:mc_crud_test/core/error/failures.dart';
 import 'package:mc_crud_test/core/usecases/usecase.dart';
 import 'package:mc_crud_test/features/customer/data/datasources/create_customer_request.dart';

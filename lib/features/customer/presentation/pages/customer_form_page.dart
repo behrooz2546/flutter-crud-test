@@ -1,9 +1,14 @@
 import 'package:fluro/fluro.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mc_crud_test/config/routes/application.dart';
 import 'package:mc_crud_test/config/routes/arguments.dart';
 import 'package:mc_crud_test/config/routes/router.dart';
+import 'package:mc_crud_test/features/customer/data/datasources/create_customer_request.dart';
+import 'package:mc_crud_test/features/customer/presentation/bloc/customer/customer_bloc.dart';
+import 'package:mc_crud_test/features/customer/presentation/bloc/customer_list/customer_list_bloc.dart';
+import 'package:mc_crud_test/service_locator.dart';
 
 class CustomerFormPage extends StatefulWidget {
   final CustomerFormPageArguments arguments;
@@ -51,25 +56,32 @@ class _CustomerFormPageState extends State<CustomerFormPage> {
   }
 
   Widget _buildBody() {
-    return SafeArea(
-      child: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 8.h),
-        child: Column(
-          children: [
-            _buildFirstNameField(),
-            16.verticalSpace,
-            _buildLastNameField(),
-            16.verticalSpace,
-            _buildEmailAddressField(),
-            16.verticalSpace,
-            _buildPhoneNumberField(),
-            16.verticalSpace,
-            _buildBirthDateFiled(),
-            16.verticalSpace,
-            _buildAccountNumberField(),
-            const Spacer(),
-            _buildButton(),
-          ],
+    return BlocListener<CustomerBloc, CustomerState>(
+      listener: (context, state) {
+        if (state is CustomerSuccessCreateState) {
+          _handleCustomerSuccessCreateState(state);
+        }
+      },
+      child: SafeArea(
+        child: Padding(
+          padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 8.h),
+          child: Column(
+            children: [
+              _buildFirstNameField(),
+              16.verticalSpace,
+              _buildLastNameField(),
+              16.verticalSpace,
+              _buildEmailAddressField(),
+              16.verticalSpace,
+              _buildPhoneNumberField(),
+              16.verticalSpace,
+              _buildBirthDateFiled(),
+              16.verticalSpace,
+              _buildAccountNumberField(),
+              const Spacer(),
+              _buildButton(),
+            ],
+          ),
         ),
       ),
     );
@@ -154,5 +166,21 @@ class _CustomerFormPageState extends State<CustomerFormPage> {
 
   void _handleSaveButtonPressed() {
     debugPrint("handleSaveButtonPressed");
+    final createRequest = CreateCustomerRequest(
+      bankAccountNumber: accountNumberTextEditingController.text,
+      firstName: firstNameTextEditingController.text,
+      lastName: lastNameTextEditingController.text,
+      email: emailAddressTextEditingController.text,
+      dateOfBirth: selectedDate ?? DateTime.now(),
+      phoneNumber: phoneNumberTextEditingController.text,
+    );
+    BlocProvider.of<CustomerBloc>(context).add(
+      CustomerCreateEvent(createRequest),
+    );
+  }
+
+  void _handleCustomerSuccessCreateState(CustomerSuccessCreateState state) {
+    sl<CustomerListBloc>().add(CustomerListLoadEvent());
+    Application.backTo(context, Routes.rootPath);
   }
 }

@@ -49,6 +49,7 @@ class CustomerDatabaseServiceImpl implements CustomerDatabaseService {
           columnId,
           columnFirstName,
           columnLastName,
+          columnPhoneNumber,
           columnDateOfBirth,
           columnEmail,
           columnBankAccountNumber,
