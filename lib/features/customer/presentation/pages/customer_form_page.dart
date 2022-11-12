@@ -110,19 +110,30 @@ class _CustomerFormPageState extends State<CustomerFormPage> {
           padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 8.h),
           child: Column(
             children: [
-              _buildFirstNameField(),
-              16.verticalSpace,
-              _buildLastNameField(),
-              16.verticalSpace,
-              _buildEmailAddressField(),
-              16.verticalSpace,
-              _buildPhoneNumberField(),
-              16.verticalSpace,
-              _buildBirthDateFiled(),
-              16.verticalSpace,
-              _buildAccountNumberField(),
-              const Spacer(),
-              _buildButton(),
+              Expanded(
+                child: SingleChildScrollView(
+                  child: Column(
+                    children: [
+                      _buildFirstNameField(),
+                      16.verticalSpace,
+                      _buildLastNameField(),
+                      16.verticalSpace,
+                      _buildEmailAddressField(),
+                      16.verticalSpace,
+                      _buildPhoneNumberField(),
+                      16.verticalSpace,
+                      _buildBirthDateFiled(),
+                      16.verticalSpace,
+                      _buildAccountNumberField(),
+                      32.verticalSpace,
+                    ],
+                  ),
+                ),
+              ),
+              SizedBox(
+                height: 40.h,
+                child: _buildButton(),
+              ),
             ],
           ),
         ),
