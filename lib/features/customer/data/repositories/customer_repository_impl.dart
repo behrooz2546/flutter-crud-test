@@ -33,9 +33,14 @@ class CustomerRepositoryImpl
   }
 
   @override
-  Future<Either<Failure, bool>> delete(String id) {
-    // TODO: implement delete
-    throw UnimplementedError();
+  Future<Either<Failure, bool>> delete(String id) async {
+    try {
+      final result = await databaseService.deleteCustomer(int.parse(id));
+      return result != null ? const Right(true) : Left(DatabaseFailure());
+    } catch (error) {
+      debugPrint(error.toString());
+      return Left(DatabaseFailure());
+    }
   }
 
   @override

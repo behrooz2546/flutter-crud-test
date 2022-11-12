@@ -71,7 +71,22 @@ class _CustomerFormPageState extends State<CustomerFormPage> {
   AppBar _buildAppBar() {
     return AppBar(
       title: const Text("Customer"),
-      actions: const [],
+      actions: [
+        _buildDeleteAction(),
+      ],
+    );
+  }
+
+  Widget _buildDeleteAction() {
+    return Padding(
+      padding: const EdgeInsets.only(right: 20.0),
+      child: GestureDetector(
+        onTap: _handleDeleteButtonTapped,
+        child: Icon(
+          Icons.delete,
+          size: 26.r,
+        ),
+      ),
     );
   }
 
@@ -235,5 +250,12 @@ class _CustomerFormPageState extends State<CustomerFormPage> {
   void _handleCustomerSuccessDeleteState(CustomerSuccessDeleteState state) {
     sl<CustomerListBloc>().add(CustomerListLoadEvent());
     Application.backTo(context, Routes.rootPath);
+  }
+
+  void _handleDeleteButtonTapped() {
+    debugPrint("_handleDeleteButtonTapped");
+    BlocProvider.of<CustomerBloc>(context).add(
+      CustomerDeleteEvent(widget.arguments.customer!),
+    );
   }
 }
