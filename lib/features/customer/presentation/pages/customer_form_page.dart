@@ -94,17 +94,7 @@ class _CustomerFormPageState extends State<CustomerFormPage> {
   Widget _buildBody() {
     return BlocListener<CustomerBloc, CustomerState>(
       listener: (context, state) {
-        if (state is CustomerSuccessCreateState) {
-          _handleCustomerSuccessCreateState(state);
-        }
-
-        if (state is CustomerSuccessUpdateState) {
-          _handleCustomerSuccessUpdateState(state);
-        }
-
-        if (state is CustomerSuccessDeleteState) {
-          _handleCustomerSuccessDeleteState(state);
-        }
+        _listenToCustomerBloc(state);
       },
       child: SafeArea(
         child: Padding(
@@ -269,6 +259,10 @@ class _CustomerFormPageState extends State<CustomerFormPage> {
     Application.backTo(context, Routes.rootPath);
   }
 
+  void _handleErrorState(CustomerErrorState state) {
+    AlertUtils.showErrorMessage(context, state.errorMessage);
+  }
+
   void _handleDeleteButtonTapped() {
     debugPrint("_handleDeleteButtonTapped");
     BlocProvider.of<CustomerBloc>(context).add(
@@ -308,5 +302,23 @@ class _CustomerFormPageState extends State<CustomerFormPage> {
     }
 
     return true;
+  }
+
+  void _listenToCustomerBloc(CustomerState state) {
+    if (state is CustomerSuccessCreateState) {
+      _handleCustomerSuccessCreateState(state);
+    }
+
+    if (state is CustomerSuccessUpdateState) {
+      _handleCustomerSuccessUpdateState(state);
+    }
+
+    if (state is CustomerSuccessDeleteState) {
+      _handleCustomerSuccessDeleteState(state);
+    }
+
+    if (state is CustomerErrorState) {
+      _handleErrorState(state);
+    }
   }
 }

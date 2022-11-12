@@ -10,6 +10,18 @@ class ServerFailure extends Failure {
 }
 
 class DatabaseFailure extends Failure {
+  final String message;
+  final int? code;
+
+  DatabaseFailure(this.message, this.code);
+
   @override
-  List<Object?> get props => [];
+  List<Object?> get props => [message, code];
+
+  static unknowError() => DatabaseFailure("error", 0);
+
+  @override
+  String toString() {
+    return message;
+  }
 }
