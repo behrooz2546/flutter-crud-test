@@ -5,8 +5,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mc_crud_test/config/routes/application.dart';
 import 'package:mc_crud_test/config/routes/arguments.dart';
 import 'package:mc_crud_test/config/routes/router.dart';
+import 'package:mc_crud_test/core/utils/alert_utils.dart';
+import 'package:mc_crud_test/core/utils/validation_utils.dart';
 import 'package:mc_crud_test/features/customer/data/datasources/create_customer_request.dart';
-import 'package:mc_crud_test/features/customer/data/datasources/update_customer_request.dart';
 import 'package:mc_crud_test/features/customer/data/models/customer_model.dart';
 import 'package:mc_crud_test/features/customer/presentation/bloc/customer/customer_bloc.dart';
 import 'package:mc_crud_test/features/customer/presentation/bloc/customer_list/customer_list_bloc.dart';
@@ -144,21 +145,22 @@ class _CustomerFormPageState extends State<CustomerFormPage> {
   Widget _buildFirstNameField() {
     return TextField(
       controller: firstNameTextEditingController,
-      decoration: const InputDecoration(hintText: "first Name"),
+      decoration: const InputDecoration(labelText: "first Name"),
     );
   }
 
   Widget _buildLastNameField() {
     return TextField(
       controller: lastNameTextEditingController,
-      decoration: const InputDecoration(hintText: "Last Name"),
+      decoration: const InputDecoration(labelText: "Last Name"),
     );
   }
 
   Widget _buildEmailAddressField() {
     return TextField(
       controller: emailAddressTextEditingController,
-      decoration: const InputDecoration(hintText: "Email Address"),
+      decoration: const InputDecoration(
+          labelText: "Email Address", hintText: "test@test.ts"),
       keyboardType: TextInputType.emailAddress,
     );
   }
@@ -166,7 +168,8 @@ class _CustomerFormPageState extends State<CustomerFormPage> {
   Widget _buildPhoneNumberField() {
     return TextField(
       controller: phoneNumberTextEditingController,
-      decoration: const InputDecoration(hintText: "Phone Number"),
+      decoration: const InputDecoration(
+          labelText: "Phone Number", hintText: "+989158949162"),
       keyboardType: TextInputType.phone,
     );
   }
@@ -189,7 +192,8 @@ class _CustomerFormPageState extends State<CustomerFormPage> {
   Widget _buildAccountNumberField() {
     return TextField(
       controller: accountNumberTextEditingController,
-      decoration: const InputDecoration(hintText: "Account Number"),
+      decoration: const InputDecoration(
+          labelText: "Account Number", hintText: "test1234"),
       keyboardType: TextInputType.text,
     );
   }
@@ -218,7 +222,9 @@ class _CustomerFormPageState extends State<CustomerFormPage> {
     }
   }
 
-  void _handleSaveButtonPressed() {
+  void _handleSaveButtonPressed() async {
+    final isValidCustomer = await isValid();
+    if (!isValidCustomer) return;
     if (widget.arguments.customer != null) {
       final updateRequest = CustomerModel(
         id: widget.arguments.customer?.id ?? 1,
@@ -268,5 +274,39 @@ class _CustomerFormPageState extends State<CustomerFormPage> {
     BlocProvider.of<CustomerBloc>(context).add(
       CustomerDeleteEvent(widget.arguments.customer!),
     );
+  }
+
+  Future<bool> isValid() async {
+    final phoneNumberValid = await ValidationUtils.isValidPhoneNumber(
+        phoneNumberTextEditingController.text);
+    final emailAddressIsValid =
+        ValidationUtils.isValidEmail(emailAddressTextEditingController.text);
+
+    if (firstNameTextEditingController.text.isEmpty) {
+      AlertUtils.showErrorMessage(context, "please fill first name");
+      return false;
+    }
+
+    if (lastNameTextEditingController.text.isEmpty) {
+      AlertUtils.showErrorMessage(context, "please fill last name");
+      return false;
+    }
+
+    if (!emailAddressIsValid) {
+      AlertUtils.showErrorMessage(context, "Invalid Email Address");
+      return false;
+    }
+
+    if (!phoneNumberValid) {
+      AlertUtils.showErrorMessage(context, "Invalid Phone Number");
+      return false;
+    }
+
+    if (accountNumberTextEditingController.text.isEmpty) {
+      AlertUtils.showErrorMessage(context, "please fill account number ");
+      return false;
+    }
+
+    return true;
   }
 }
