@@ -24,16 +24,15 @@ void main() async {
   });
 
   final customer = MockCustomerModel();
-  final request = MockUpdateCustomerRequest();
 
   test('should update customer from repository', () async {
     when(repository.updateCustomer(any))
         .thenAnswer((_) async => Right(customer));
-    final result = await usecase.call(request);
+    final result = await usecase.call(customer);
 
     expect(result, Right(customer));
 
-    verify(repository.updateCustomer(request));
+    verify(repository.updateCustomer(customer));
     verifyNoMoreInteractions(repository);
   });
 

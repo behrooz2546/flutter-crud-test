@@ -50,8 +50,12 @@ class _CustomerListPageState extends State<CustomerListPage> {
 
   Widget _buildListView(CustomerListLoadedState state) {
     return ListView.separated(
-      itemBuilder: (context, index) =>
-          CustomerItem(model: state.customers[index]),
+      itemBuilder: (context, index) => CustomerItem(
+        model: state.customers[index],
+        onItemTapped: (model) {
+          CustomerFormPage.show(context: context, customer: model);
+        },
+      ),
       separatorBuilder: ((context, index) => 8.verticalSpace),
       itemCount: state.customers.length,
     );

@@ -70,7 +70,7 @@ void main() {
       deleteCustomerUsecase: deleteCustomerUsecase,
     ),
     act: (bloc) => bloc.add(
-      CustomerUpdateEvent(updateRequest),
+      CustomerUpdateEvent(model),
     ),
     wait: const Duration(milliseconds: 300),
     expect: () => [

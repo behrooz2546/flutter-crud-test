@@ -12,7 +12,7 @@ class CustomerCreateEvent extends CustomerEvent {
 }
 
 class CustomerUpdateEvent extends CustomerEvent {
-  final UpdateCustomerRequest request;
+  final CustomerModel request;
 
   CustomerUpdateEvent(this.request);
 

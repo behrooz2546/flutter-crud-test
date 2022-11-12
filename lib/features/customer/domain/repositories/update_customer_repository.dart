@@ -1,9 +1,7 @@
 import 'package:either_dart/either.dart';
 import 'package:mc_crud_test/core/error/failures.dart';
-import 'package:mc_crud_test/features/customer/data/datasources/update_customer_request.dart';
 import 'package:mc_crud_test/features/customer/data/models/customer_model.dart';
 
 abstract class UpdateCustomerRepository {
-  Future<Either<Failure, CustomerModel>> updateCustomer(
-      UpdateCustomerRequest request);
+  Future<Either<Failure, CustomerModel>> updateCustomer(CustomerModel request);
 }

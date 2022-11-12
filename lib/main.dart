@@ -16,8 +16,8 @@ void main() async {
   // config fluro router
   final router = FluroRouter();
   Routes.configureRoutes(router);
-
   Application.router = router;
+  
   runApp(const MyApp());
 }
 

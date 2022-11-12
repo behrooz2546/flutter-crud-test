@@ -6,6 +6,8 @@ import 'package:mc_crud_test/config/routes/application.dart';
 import 'package:mc_crud_test/config/routes/arguments.dart';
 import 'package:mc_crud_test/config/routes/router.dart';
 import 'package:mc_crud_test/features/customer/data/datasources/create_customer_request.dart';
+import 'package:mc_crud_test/features/customer/data/datasources/update_customer_request.dart';
+import 'package:mc_crud_test/features/customer/data/models/customer_model.dart';
 import 'package:mc_crud_test/features/customer/presentation/bloc/customer/customer_bloc.dart';
 import 'package:mc_crud_test/features/customer/presentation/bloc/customer_list/customer_list_bloc.dart';
 import 'package:mc_crud_test/service_locator.dart';
@@ -16,13 +18,14 @@ class CustomerFormPage extends StatefulWidget {
 
   static show({
     required BuildContext context,
+    CustomerModel? customer,
   }) {
+    final setting =
+        RouteSettings(arguments: CustomerFormPageArguments(customer: customer));
     Application.router.navigateTo(
       context,
       Routes.customerFormPath,
-      routeSettings: RouteSettings(
-        arguments: CustomerFormPageArguments(),
-      ),
+      routeSettings: setting,
       transition: TransitionType.cupertino,
     );
   }
@@ -39,6 +42,23 @@ class _CustomerFormPageState extends State<CustomerFormPage> {
   final accountNumberTextEditingController = TextEditingController();
 
   DateTime? selectedDate;
+
+  @override
+  void initState() {
+    super.initState();
+
+    firstNameTextEditingController.text =
+        widget.arguments.customer?.firstName ?? "";
+    lastNameTextEditingController.text =
+        widget.arguments.customer?.lastName ?? "";
+    emailAddressTextEditingController.text =
+        widget.arguments.customer?.email ?? "";
+    phoneNumberTextEditingController.text =
+        widget.arguments.customer?.phoneNumber ?? "";
+    accountNumberTextEditingController.text =
+        widget.arguments.customer?.bankAccountNumber ?? "";
+    selectedDate = widget.arguments.customer?.dateOfBirth;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -60,6 +80,14 @@ class _CustomerFormPageState extends State<CustomerFormPage> {
       listener: (context, state) {
         if (state is CustomerSuccessCreateState) {
           _handleCustomerSuccessCreateState(state);
+        }
+
+        if (state is CustomerSuccessUpdateState) {
+          _handleCustomerSuccessUpdateState(state);
+        }
+
+        if (state is CustomerSuccessDeleteState) {
+          _handleCustomerSuccessDeleteState(state);
         }
       },
       child: SafeArea(
@@ -165,6 +193,21 @@ class _CustomerFormPageState extends State<CustomerFormPage> {
   }
 
   void _handleSaveButtonPressed() {
+    if (widget.arguments.customer != null) {
+      final updateRequest = CustomerModel(
+        id: widget.arguments.customer?.id ?? 1,
+        bankAccountNumber: accountNumberTextEditingController.text,
+        firstName: firstNameTextEditingController.text,
+        lastName: lastNameTextEditingController.text,
+        email: emailAddressTextEditingController.text,
+        dateOfBirth: selectedDate ?? DateTime.now(),
+        phoneNumber: phoneNumberTextEditingController.text,
+      );
+      BlocProvider.of<CustomerBloc>(context).add(
+        CustomerUpdateEvent(updateRequest),
+      );
+      return;
+    }
     debugPrint("handleSaveButtonPressed");
     final createRequest = CreateCustomerRequest(
       bankAccountNumber: accountNumberTextEditingController.text,
@@ -180,6 +223,16 @@ class _CustomerFormPageState extends State<CustomerFormPage> {
   }
 
   void _handleCustomerSuccessCreateState(CustomerSuccessCreateState state) {
+    sl<CustomerListBloc>().add(CustomerListLoadEvent());
+    Application.backTo(context, Routes.rootPath);
+  }
+
+  void _handleCustomerSuccessUpdateState(CustomerSuccessUpdateState state) {
+    sl<CustomerListBloc>().add(CustomerListLoadEvent());
+    Application.backTo(context, Routes.rootPath);
+  }
+
+  void _handleCustomerSuccessDeleteState(CustomerSuccessDeleteState state) {
     sl<CustomerListBloc>().add(CustomerListLoadEvent());
     Application.backTo(context, Routes.rootPath);
   }

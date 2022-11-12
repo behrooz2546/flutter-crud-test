@@ -57,8 +57,13 @@ class CustomerRepositoryImpl
 
   @override
   Future<Either<Failure, CustomerModel>> updateCustomer(
-      UpdateCustomerRequest request) {
-    // TODO: implement updateCustomer
-    throw UnimplementedError();
+      CustomerModel request) async {
+    try {
+      final id = await databaseService.updateCustomer(request);
+      return id != null ? Right(request) : Left(DatabaseFailure());
+    } catch (error) {
+      debugPrint(error.toString());
+      return Left(DatabaseFailure());
+    }
   }
 }

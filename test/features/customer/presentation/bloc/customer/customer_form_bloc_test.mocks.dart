@@ -10,7 +10,7 @@ import 'package:mc_crud_test/core/error/failures.dart' as _i8;
 import 'package:mc_crud_test/features/customer/data/datasources/create_customer_request.dart'
     as _i10;
 import 'package:mc_crud_test/features/customer/data/datasources/update_customer_request.dart'
-    as _i12;
+    as _i13;
 import 'package:mc_crud_test/features/customer/data/models/customer_model.dart'
     as _i9;
 import 'package:mc_crud_test/features/customer/domain/repositories/create_customer_repository.dart'
@@ -22,7 +22,7 @@ import 'package:mc_crud_test/features/customer/domain/repositories/update_custom
 import 'package:mc_crud_test/features/customer/domain/usecases/create_customer_usecase.dart'
     as _i6;
 import 'package:mc_crud_test/features/customer/domain/usecases/delete_customer_usecase.dart'
-    as _i13;
+    as _i12;
 import 'package:mc_crud_test/features/customer/domain/usecases/update_customer_usecase.dart'
     as _i11;
 import 'package:mockito/mockito.dart' as _i1;
@@ -147,7 +147,7 @@ class MockUpdateCustomerUsecase extends _i1.Mock
       ) as _i4.UpdateCustomerRepository);
   @override
   _i7.Future<_i3.Either<_i8.Failure, _i9.CustomerModel>> call(
-          _i12.UpdateCustomerRequest? request) =>
+          _i9.CustomerModel? request) =>
       (super.noSuchMethod(
         Invocation.method(
           #call,
@@ -169,7 +169,7 @@ class MockUpdateCustomerUsecase extends _i1.Mock
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockDeleteCustomerUsecase extends _i1.Mock
-    implements _i13.DeleteCustomerUsecase {
+    implements _i12.DeleteCustomerUsecase {
   MockDeleteCustomerUsecase() {
     _i1.throwOnMissingStub(this);
   }
@@ -353,11 +353,16 @@ class MockCreateCustomerRequest extends _i1.Mock
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockUpdateCustomerRequest extends _i1.Mock
-    implements _i12.UpdateCustomerRequest {
+    implements _i13.UpdateCustomerRequest {
   MockUpdateCustomerRequest() {
     _i1.throwOnMissingStub(this);
   }
 
+  @override
+  int get id => (super.noSuchMethod(
+        Invocation.getter(#id),
+        returnValue: 0,
+      ) as int);
   @override
   String get firstName => (super.noSuchMethod(
         Invocation.getter(#firstName),

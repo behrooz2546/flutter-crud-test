@@ -21,7 +21,7 @@ dependencies:
   intl: ^0.17.0
   flutter_bloc: ^8.1.1
   flutter_screenutil: ^5.6.0
-  fluro: ^2.0.4
+  fluro: ^2.0.3
   mock_data: ^2.0.0
 
 dev_dependencies:

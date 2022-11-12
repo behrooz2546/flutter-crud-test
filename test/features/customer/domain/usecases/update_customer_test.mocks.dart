@@ -57,7 +57,7 @@ class MockUpdateCustomerRepository extends _i1.Mock
 
   @override
   _i4.Future<_i2.Either<_i5.Failure, _i6.CustomerModel>> updateCustomer(
-          _i7.UpdateCustomerRequest? request) =>
+          _i6.CustomerModel? request) =>
       (super.noSuchMethod(
         Invocation.method(
           #updateCustomer,
@@ -176,6 +176,11 @@ class MockUpdateCustomerRequest extends _i1.Mock
     _i1.throwOnMissingStub(this);
   }
 
+  @override
+  int get id => (super.noSuchMethod(
+        Invocation.getter(#id),
+        returnValue: 0,
+      ) as int);
   @override
   String get firstName => (super.noSuchMethod(
         Invocation.getter(#firstName),
